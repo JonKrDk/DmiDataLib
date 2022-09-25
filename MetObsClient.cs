@@ -13,7 +13,7 @@ namespace DmiDataLib
     public class MetObsClient
     {
         private readonly string _apikey;
-        private readonly string _baseUrl;
+        private const string _baseUrl = "https://dmigw.govcloud.dk/v2/metObs";
         private bool _connected;
         private HttpClient _httpClient;
 
@@ -21,11 +21,9 @@ namespace DmiDataLib
         /// Constructor
         /// </summary>
         /// <param name="apikey">API Key from DMI</param>
-        /// <param name="baseUrl">Root URL for the Open API</param>
-        public MetObsClient(string apikey, string baseUrl)
+        public MetObsClient(string apikey)
         {
             this._apikey = apikey;
-            this._baseUrl = baseUrl;
             this._connected = false;
         }
 
@@ -35,7 +33,7 @@ namespace DmiDataLib
         private void Connect()
         {
             _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri(this._baseUrl);
+            _httpClient.BaseAddress = new Uri(_baseUrl);
             _connected = true;
         }
 
