@@ -41,12 +41,12 @@ namespace DmiDataLib
         /// Get all Stations
         /// </summary>
         /// <returns>A list of Stations</returns>
-        public List<Station> GetStations()
+        public async Task<List<Station>> GetStations()
         {
             if (!_connected) { Connect(); }
 
             string request = $"{_baseUrl}/collections/station/items?api-key={_apikey}";
-            var httpResult = _httpClient.GetStringAsync(request).Result;
+            var httpResult = await _httpClient.GetStringAsync(request);
             StationDto.Root root= JsonConvert.DeserializeObject<StationDto.Root>(httpResult);
 
             List<Station> result = new List<Station>();
@@ -96,7 +96,7 @@ namespace DmiDataLib
         /// <param name="status">Narrow the search to only allow stations having a specific status</param>
         /// <param name="stationType">Narrow the search to only allow stations having a specific type</param>
         /// <returns>A sorted list of Stations, each having a sorted list of parameters, and each parameter have a timebase sorted list of values</returns>
-        public SortedList<string, StationData> GetObservations(
+        public async Task<SortedList<string, StationData>> GetObservations(
             int? limit = null, 
             int? offset = null, 
             string stationId = null, 
@@ -144,7 +144,7 @@ namespace DmiDataLib
             if (status != null) { request += $"&status={status}"; }
             if (stationType!= null) { request += $"&type={stationType}"; }
 
-            var response = _httpClient.GetStringAsync(request).Result;
+            var response = await _httpClient.GetStringAsync(request);
             ObservationDto.Root root = JsonConvert.DeserializeObject<ObservationDto.Root>(response);
 
             SortedList<string, StationData> stationDataList = new SortedList<string, StationData>();
