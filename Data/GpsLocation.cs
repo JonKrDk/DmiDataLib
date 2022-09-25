@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace DmiDataLib.Data
 {
+    /// <summary>
+    /// Gps Location for measurering stations
+    /// </summary>
     public class GpsLocation
     {
         public double Latitude { get; set; }
