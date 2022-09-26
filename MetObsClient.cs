@@ -159,6 +159,7 @@ namespace DmiDataLib
                 else
                 {
                     stationData = new StationData();
+                    stationData.Count = root.numberReturned;
                     stationData.StationId = feature.properties.stationId;
                     stationDataList.Add(feature.properties.stationId, stationData);
                 }
@@ -184,7 +185,7 @@ namespace DmiDataLib
                 if (parameterData.ObservationData.ContainsKey(feature.properties.observed.ToLocalTime()))
                 {
                     observation = parameterData.ObservationData[feature.properties.observed.ToLocalTime()];
-                    Debug.WriteLine($"Warning : Duplicate data for Station=[{stationData.StationId}], Parameter=[{parameterData.Name}], Time=[{observation.Observed}], Value=[{observation.Value}]");
+                    // Debug.WriteLine($"Warning : Duplicate data for Station=[{stationData.StationId}], Parameter=[{parameterData.Name}], Time=[{observation.Observed}], Value=[{observation.Value}]");
                 }
                 else
                 {
