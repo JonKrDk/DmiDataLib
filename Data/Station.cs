@@ -21,5 +21,7 @@
         public DateTime? ValidTo { get; set; }
         public string WmoCountryCode { get; set; }
         public string WmoStationId { get; set; }
+
+        public SortedList<string, ParameterData> Parameters { get; set; } = new SortedList<string, ParameterData>();
     }
 }

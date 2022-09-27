@@ -45,6 +45,7 @@ namespace DmiDataLib
         {
             if (!_connected) { Connect(); }
 
+
             string request = $"{_baseUrl}/collections/station/items?api-key={_apikey}";
             var httpResult = await _httpClient.GetStringAsync(request);
             StationDto.Root root= JsonConvert.DeserializeObject<StationDto.Root>(httpResult);
