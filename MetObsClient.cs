@@ -174,11 +174,14 @@ namespace DmiDataLib
                 {
                     parameterData = new ParameterData();
                     parameterData.Name = feature.properties.parameterId;
-                    parameterData.Location = new GpsLocation()
+                    if (feature.geometry != null)
                     {
-                        Latitude = feature.geometry.coordinates[0],
-                        Longitude = feature.geometry.coordinates[1]
-                    };
+                        parameterData.Location = new GpsLocation()
+                        {
+                            Latitude = feature.geometry.coordinates[0],
+                            Longitude = feature.geometry.coordinates[1]
+                        };
+                    }
                     stationData.Parameters.Add(feature.properties.parameterId, parameterData);
                 }
 
